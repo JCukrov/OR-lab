@@ -1,0 +1,222 @@
+[
+  {
+    "id": 1,
+    "name": "Bonusweet",
+    "type": "grass",
+    "hp": 761,
+    "rarity": 60,
+    "series": "Obsidian Flames",
+    "set_number": "16",
+    "illustrator": "Kurata So",
+    "weaknesses": 2023,
+    "attacks": [
+      {
+        "name": "Stampede",
+        "damage": "10",
+        "effect": null
+      },
+      {
+        "name": "Reckless Charge",
+        "damage": "30",
+        "effect": "This Pokemon also does 10 damage to itself."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Snivy",
+    "type": "grass",
+    "hp": 495,
+    "rarity": 70,
+    "series": "Black Bolt",
+    "set_number": "1",
+    "illustrator": "Susumu Moeya",
+    "weaknesses": 2025,
+    "attacks": [
+      {
+        "name": "Tackle",
+        "damage": "10",
+        "effect": null
+      },
+      {
+        "name": "Vine Whip",
+        "damage": "30",
+        "effect": null
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Golurk",
+    "type": "psychic",
+    "hp": 623,
+    "rarity": 160,
+    "series": "Black Bolt",
+    "set_number": "43",
+    "illustrator": "Uta",
+    "weaknesses": 2025,
+    "attacks": [
+      {
+        "name": "Double Smash",
+        "damage": "80",
+        "effect": "FLip 2 coins. This attack does 80 damage for each heads."
+      },
+      {
+        "name": "Golruk Hammer",
+        "damage": "200",
+        "effect": null
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Oranguru",
+    "type": "psychic",
+    "hp": 765,
+    "rarity": 120,
+    "series": "Paldea Evolved",
+    "set_number": "94",
+    "illustrator": "Tashinao Aoki",
+    "weaknesses": 2023,
+    "attacks": [
+      {
+        "name": "Plotter's Command",
+        "damage": "30",
+        "effect": "Choose 1 of your opponent's Active Pokemon's attacks. During your opponent's next turn, that Pokemon can't use that attack."
+      },
+      {
+        "name": "Super Psy Bolt",
+        "damage": "80",
+        "effect": null
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Drifblim",
+    "type": "psychic",
+    "hp": 426,
+    "rarity": 110,
+    "series": "Astral Radiance",
+    "set_number": "64",
+    "illustrator": "Kyoko Umemoto",
+    "weaknesses": 2022,
+    "attacks": [
+      {
+        "name": "Spooky Balloon",
+        "damage": "50",
+        "effect": "Put 2 damage counters on 1 of your opponent's Benched Pokemon"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Team Rocket's Wobbuffet",
+    "type": "psychic",
+    "hp": 202,
+    "rarity": 110,
+    "series": "Destined Rivals",
+    "set_number": "82",
+    "illustrator": "Kazumasa Yasukuni",
+    "weaknesses": 2025,
+    "attacks": [
+      {
+        "name": "Rocket Mirror",
+        "damage": null,
+        "effect": "Move all damage counters from 1 of your Benched Team Rocket's Pokemon to your opponent's Active Pokemon"
+      },
+      {
+        "name": "HeadbuttBounce",
+        "damage": "70",
+        "effect": null
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Mr. Mime",
+    "type": "psychic",
+    "hp": 122,
+    "rarity": 90,
+    "series": "Temporal Forces",
+    "set_number": "63",
+    "illustrator": "Nelnal",
+    "weaknesses": 2024,
+    "attacks": [
+      {
+        "name": "Look-Alike Show",
+        "damage": null,
+        "effect": "Your opponent reveals their hand. You may use the effect of a Supporter card you find there as the effect of this attack."
+      },
+      {
+        "name": "Eerie Wave",
+        "damage": "20",
+        "effect": "Your opponent's Active Pokemon is now Confused."
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Mewostic",
+    "type": "psychic",
+    "hp": 678,
+    "rarity": 90,
+    "series": "Surging Sparks",
+    "set_number": "85",
+    "illustrator": "Yoriyuki Ikegami",
+    "weaknesses": 2024,
+    "attacks": [
+      {
+        "name": "Psyshot",
+        "damage": "80",
+        "effect": null
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Greavard",
+    "type": "psychic",
+    "hp": 971,
+    "rarity": 70,
+    "series": "Obsidian Flames",
+    "set_number": "99",
+    "illustrator": "Shibuzoh.",
+    "weaknesses": 2023,
+    "attacks": [
+      {
+        "name": "Gnaw",
+        "damage": "10",
+        "effect": null
+      },
+      {
+        "name": "Spooky Shot",
+        "damage": "20",
+        "effect": null
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Musharna",
+    "type": "psychic",
+    "hp": 518,
+    "rarity": 120,
+    "series": "Black Bolt",
+    "set_number": "36",
+    "illustrator": "Eri Kamei",
+    "weaknesses": 2025,
+    "attacks": [
+      {
+        "name": "Dream Calling",
+        "damage": null,
+        "effect": "You may search your deck for any number of Fennel cards, reveal them, and put them into your hand. Then, shuffle your deck."
+      },
+      {
+        "name": "Sleep Pulse",
+        "damage": "50",
+        "effect": "Your opponent's Active Pokemon is now Asleep."
+      }
+    ]
+  }
+]
