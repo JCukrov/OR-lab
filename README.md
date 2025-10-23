@@ -1,6 +1,6 @@
-# OR-lab
-
 # Pokémon Cards Dataset
+
+Language: English
 
 This dataset contains information about Pokémon Trading Card Game (TCG) cards.  
 Each entry represents one Pokémon card with its attributes and related attacks.  
