@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "./cards.json",
+  "type": "array",
+  "title": "Pokémon Cards Dataset",
+  "description": "A dataset containing Pokémon TCG cards and their attacks.",
+  "items": {
+    "type": "object",
+    "title": "Card",
+    "required": ["id", "name", "type", "pokedex_number", "hp", "series", "set_number", "illustrator", "release_year", "attacks"],
+    "properties": {
+      "id": {
+        "type": "integer",
+        "title": "Id",
+        "description": "Unique identifier of the card."
+      },
+      "name": {
+        "type": "string",
+        "title": "Name",
+        "description": "Name of the Pokémon."
+      },
+      "type": {
+        "type": "string",
+        "title": "Type",
+        "description": "Pokémon type"
+      },
+      "pokedex_number": {
+        "type": "integer",
+        "title": "Pokédex Number",
+        "description": "Pokédex number of the Pokémon."
+      },
+      "hp": {
+        "type": "integer",
+        "title": "HP",
+        "description": "Hit Points of the Pokémon."
+      },
+      "series": {
+        "type": "string",
+        "title": "Series",
+        "description": "Card series name."
+      },
+      "set_number": {
+        "type": "string",
+        "title": "Set Number",
+        "description": "Number of the card in the series."
+      },
+      "illustrator": {
+        "type": "string",
+        "title": "Illustrator",
+        "description": "Artist who illustrated the card."
+      },
+      "release_year": {
+        "type": "integer",
+        "title": "Release Year",
+        "description": "Year of release."
+      },
+      "attacks": {
+        "type": "array",
+        "title": "Attacks",
+        "description": "List of attacks associated with the card.",
+        "items": {
+          "type": "object",
+          "required": ["name", "damage", "effect"],
+          "properties": {
+            "name": {
+              "type": "string",
+              "title": "Attack Name",
+              "description": "Name of the attack."
+            },
+            "damage": {
+              "type": ["string", "null"],
+              "title": "Attack Damage",
+              "description": "Damage points of the attack. Can be null if not specified."
+            },
+            "effect": {
+              "type": ["string", "null"],
+              "title": "Attack Effect",
+              "description": "Additional description or effect of the attack. Can be null."
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+  <title>Pokémon Cards Dataset</title>
+  <meta name="description" content="This dataset contains information about Pokémon Trading Card Game (TCG) cards.
+Each entry represents one Pokémon card with its attributes and related attacks.
+The dataset is designed for educational purposes — to demonstrate database modeling, data export, and open data publishing.">
+  <meta name="author" content="Your Josip Cukrov">
+</head>
+
+<body>
+  <main>
+    <h1>Pokémon Cards Dataset</h1>
+    <p>Language: English</p>
+    <p>This dataset contains information about Pokémon Trading Card Game (TCG) cards. Each entry represents one Pokémon card with its attributes and related attacks. Designed for educational purposes — to demonstrate database modeling, data export, and open data publishing.</p>
+    <a href="./cards.json" download>Prezimanje JSON formata</a>
+    <a href="./cards.csv" download>Preuzimanje CSV formata</a>
+    
+    <h2>🧩 Dataset Description</h2>
+    <p><strong>Main entity:</strong> Pokémon card (<code>cards</code>)<br>
+    <strong>Child entity:</strong> Attack (<code>attacks</code>)</p>
+    <p>Each card can have one or more attacks, creating a parent-child relationship.</p>
+    
+
+
+    <h3>Attributes (columns / JSON keys)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Attribute</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>id</td><td>Unique identifier of the card</td></tr>
+        <tr><td>name</td><td>Name of the Pokémon</td></tr>
+        <tr><td>type</td><td>Pokémon type (e.g., Grass, Psychic)</td></tr>
+        <tr><td>pokedex_number</td><td>Pokédex number of the Pokémon</td></tr>
+        <tr><td>hp</td><td>Hit Points</td></tr>
+        <tr><td>series</td><td>Card series name (e.g., Obsidian Flames, Black Bolt)</td></tr>
+        <tr><td>set_number</td><td>Number of the card in the series</td></tr>
+        <tr><td>illustrator</td><td>Artist who illustrated the card</td></tr>
+        <tr><td>release_year</td><td>Year of release</td></tr>
+        <tr><td>attacks</td><td>List of attacks associated with the card</td></tr>
+        <tr><td>attack_name</td><td>Name of the attack (CSV version)</td></tr>
+        <tr><td>attack_damage</td><td>Damage points of the attack</td></tr>
+        <tr><td>attack_effect</td><td>Additional description or effect of the attack</td></tr>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>
