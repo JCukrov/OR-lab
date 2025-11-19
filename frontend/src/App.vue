@@ -47,12 +47,10 @@ const searchValue = ref<string>('')
 
 const handleSearch = async() => {
   if (searchValue.value === ''){
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/cards`)
-    console.log(res.data.cards)
-  
-    cards.value = res.data.cards as Card[]
+    fetchAll()
+    return
   }
-  const res = await axios.post(`${import.meta.env.VITE_API_URL}/cards`,{
+  const res = await axios.post(`${import.meta.env.VITE_API_URL}/search_cards`,{
     column: searchColumn.value || 'all',
     value: searchValue.value
   })

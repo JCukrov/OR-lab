@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS attacks (
         name TEXT,
         damage TEXT,
         effect TEXT,
-        FOREIGN KEY(card_id) REFERENCES cards(id)
+        FOREIGN KEY(card_id) REFERENCES cards(id) ON DELETE CASCADE
     );
 CREATE TABLE IF NOT EXISTS cards (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
