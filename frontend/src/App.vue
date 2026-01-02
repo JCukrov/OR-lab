@@ -60,7 +60,7 @@ const handleSearch = async() => {
 
 const fetchAll = async() => {
     const res = await axios.get(`${import.meta.env.VITE_API_URL}/cards`)
-    cards.value = res.data.cards
+    cards.value = res.data.response.cards
 }
 
 function return_JSON() {

@@ -5,8 +5,8 @@ last_where_clause = ''
 # HELPER
 
 def format_result(result: list):
+    print(result)
     for i, item in enumerate(result):
-
         result[i] = {
                             'id': item[0], 'name': item[1], 'type': item[2], 'pokedex_number': item[3],
                             'hp': item[4], 'series': item[5], 'set_number': item[6],
@@ -47,10 +47,14 @@ def get_card_by_id(id: str) -> dict:
     FROM cards
     JOIN attacks
     ON attacks.card_id = cards.id
-    WHERE card.id = ?
+    WHERE cards.id = ?
+    GROUP BY cards.id
     '''
-    result = cur.execute(query, [id]).fetchone()
+    result = cur.execute(query, [id]).fetchall()
 
+    if result == []:
+        return None
+    print(result)
     return {'card': format_result(result)[0]}
 
 # 3 GET routes
@@ -62,9 +66,13 @@ def get_cards_by_type(card_type: str) -> dict:
     FROM cards
     JOIN attacks
     ON attacks.card_id = cards.id
-    WHERE card.type = ?
+    WHERE cards.type = ?
+    GROUP BY cards.id
     '''
     result = cur.execute(query, [card_type]).fetchall()
+
+    if result == []:
+        return None
 
     return {'cards': format_result(result)}
 
@@ -76,10 +84,13 @@ def get_cards_by_year(release_year: str) -> dict:
     FROM cards
     JOIN attacks
     ON attacks.card_id = cards.id
-    WHERE card.release_year = ?
+    WHERE cards.release_year = ?
+    GROUP BY cards.id
     '''
     result = cur.execute(query, [release_year]).fetchall()
 
+    if result == []:
+        return None
     return {'cards': format_result(result)}
 
 def get_cards_by_series(series: str) -> dict:
@@ -90,10 +101,13 @@ def get_cards_by_series(series: str) -> dict:
     FROM cards
     JOIN attacks
     ON attacks.card_id = cards.id
-    WHERE card.series = ?
+    WHERE cards.series = ?
+    GROUP BY cards.id
     '''
     result = cur.execute(query, [series]).fetchall()
 
+    if result == []:
+        return None
     return {'cards': format_result(result)}
 
 #----------------------------------------
@@ -102,44 +116,46 @@ def get_cards_by_series(series: str) -> dict:
 def add_card(card: dict):
     con = sqlite3.connect('./data/database.db')
     cur = con.cursor()
-    query = '''
-    INSERT INTO cards(name, type, pokedex_number, hp, series, set_number, illustrator, release_year)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    '''
-    cur.execute(query, [card.name, card.card_type, card.pokedex_number, card.hp, card.series, card.set_number, card.illustrator, card.release_year])
-    
-    card_id = cur.lastrowid
+    try:
+        query = '''
+        INSERT INTO cards(name, type, pokedex_number, hp, series, set_number, illustrator, release_year)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        '''
+        cur.execute(query, [card.name, card.card_type, card.pokedex_number, card.hp, card.series, card.set_number, card.illustrator, card.release_year])
+        
+        card_id = cur.lastrowid
 
-    query = '''
-    INSERT INTO attacks(card_id, name, damage, effect)
-    VALUES (?, ?, ?, ?)
-    '''
-    cur.execute(query, [card_id, card.attack_name, card.attack_damage, card.attack_effect])
-    con.commit()
-    con.close()
-
-    return{'id': card_id, 'card': get_card_by_id(card_id)}
+        query = '''
+        INSERT INTO attacks(card_id, name, damage, effect)
+        VALUES (?, ?, ?, ?)
+        '''
+        cur.execute(query, [card_id, card.attack_name, card.attack_damage, card.attack_effect])
+        con.commit()
+        con.close()
+    except:
+        return {'status': 'Error'}
+    return{'status': 'Success', 'id': card_id, 'card': get_card_by_id(card_id)}
 
 
 #---------------------------------------------------
 # UPDATE CARDS
 #---------------------------------------------------
 
-def update_card(id: str, request: dict):
+def update_card(id: str, newName: str):
     con = sqlite3.connect('./data/database.db')
     cur = con.cursor()
     query = '''
     UPDATE cards
-    SET cards.name = HELLO 
+    SET name = ?
     WHERE cards.id = ?
     '''
     try:
         cur.execute(query, [newName, id])
         con.commit()
         con.close()
-        return 'Success'
+        return {'status': 'Success', 'card': get_card_by_id(id)}
     except:
-        return 'Error'
+        return {'status': 'Failed', 'card': None}
 
 #---------------------------------------------------
 # DELETE CARDS
@@ -148,18 +164,22 @@ def update_card(id: str, request: dict):
 def delete_card_by_id(card_id: str):
     con = sqlite3.connect('./data/database.db')
     cur = con.cursor()
+    card = get_card_by_id(card_id)
+    if card == None:
+        return {'status': "Error", 'card': None}
+
     query = '''
     DELETE FROM cards
     WHERE id = ?
     '''
     try:
-        cur.execute(query, [id])
+        cur.execute(query, [card_id])
         con.commit()
         con.close()
-        return 'Success'
+        return {'status':'Success', 'card': card}
     except Exception(e):
         print(e)
-        return 'Error'
+        return {'status': 'Error', 'card': None}
 
 #-----------------------------------------
 # SEARCH FILTERING
