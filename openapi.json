@@ -1,0 +1,359 @@
+{
+    "openapi": "3.2.0",
+    "info": {
+        "title": "Pokemon Cards Dataset API",
+        "description": "API for information about Pokémon Trading Card Game (TCG) cards.",
+        "version": "1.0"
+    },
+    "paths": {
+        "/cards": {
+            "get": {
+                "summary": "Get all cards",
+                "description": "Returns a list of all cards",
+                "responses": {
+                    "200": {
+                        "description": "Successful fetch",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CardListResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/card/id/{card_id}": {
+            "get": {
+                "summary": "Get card by ID",
+                "description": "Returns a single card by its ID",
+                "parameters": [
+                    {
+                        "name": "card_id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID of the card",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Card found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CardResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Card not found"
+                    }
+                }
+            }
+        },
+        "/cards/year/{release_year}": {
+            "get": {
+                "summary": "Get cards by release year",
+                "parameters": [
+                    {
+                        "name": "release_year",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cards found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CardListResponse"
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "No cards for given year"
+                        }
+                    }
+                }
+            },
+            "/cards/type/{card_type}": {
+                "get": {
+                    "summary": "Get cards by type",
+                    "parameters": [
+                        {
+                            "name": "card_type",
+                            "in": "path",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Cards found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/CardListResponse"
+                                    }
+                                }
+                            },
+                            "404": {
+                                "description": "No cards with given type"
+                            }
+                        }
+                    }
+                },
+                "/cards/series/{series}": {
+                    "get": {
+                        "summary": "Get cards by series",
+                        "parameters": [
+                            {
+                                "name": "series",
+                                "in": "path",
+                                "required": true,
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "Cards found",
+                                "content": {
+                                    "application/json": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/CardListResponse"
+                                        }
+                                    }
+                                },
+                                "404": {
+                                    "description": "No cards from given series"
+                                }
+                            }
+                        }
+                    },
+                    "/card/add": {
+                        "post": {
+                            "summary": "Add a new card",
+                            "requestBody": {
+                                "required": true,
+                                "content": {
+                                    "application/json": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/CardAdd"
+                                        }
+                                    }
+                                }
+                            },
+                            "responses": {
+                                "200": {
+                                    "description": "Card added successfully",
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "$ref": "#/components/schemas/CardResponse"
+                                            }
+                                        }
+                                    }
+                                },
+                                "400": {
+                                    "description": "Malformed request"
+                                }
+                            }
+                        }
+                    },
+                    "/card/update/{card_id}/name": {
+                        "put": {
+                            "summary": "Update card name",
+                            "parameters": [
+                                {
+                                    "name": "card_id",
+                                    "in": "path",
+                                    "required": true,
+                                    "schema": {
+                                        "type": "integer"
+                                    }
+                                }
+                            ],
+                            "requestBody": {
+                                "required": true,
+                                "content": {
+                                    "application/json": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/CardUpdateRequest"
+                                        }
+                                    }
+                                }
+                            },
+                            "responses": {
+                                "201": {
+                                    "description": "Card updated",
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "$ref": "#/components/schemas/CardResponse"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "404": {
+                                "description": "Card not found"
+                            },
+                            "400": {
+                                "description": "Bad request"
+                            }
+                        }
+                    }
+                },
+                "/card/delete/{card_id}": {
+                    "delete": {
+                        "summary": "Delete card by ID",
+                        "parameters": [
+                            {
+                                "name": "card_id",
+                                "in": "path",
+                                "required": true,
+                                "schema": {
+                                    "type": "integer"
+                                }
+                            }
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "Card deleted",
+                                "content": {
+                                    "application/json": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/CardResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Card not found"
+                        }
+                    }
+                }
+            },
+            "/search_cards": {
+                "post": {
+                    "summary": "Search cards by column and value",
+                    "requestBody": {
+                        "required": true,
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CardSearch"
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "Search results"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Card": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "card_type": {
+                        "type": "string"
+                    },
+                    "pokedex_number": {
+                        "type": "integer"
+                    },
+                    "hp": {
+                        "type": "integer"
+                    },
+                    "series": {
+                        "type": "string"
+                    },
+                    "set_number": {
+                        "type": "integer"
+                    },
+                    "illustrator": {
+                        "type": "string"
+                    },
+                    "release_year": {
+                        "type": "integer"
+                    },
+                    "attack_name": {
+                        "type": "string"
+                    },
+                    "attack_damage": {
+                        "type": "integer"
+                    },
+                    "attack_effect": {
+                        "type": "string"
+                    }
+                }
+            },
+            "CardAdd": {
+                "$ref": "#/components/schemas/Card"
+            },
+            "CardUpdateRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "CardSearch": {
+                "type": "object",
+                "properties": {
+                    "column": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    }
+                }
+            },
+            "CardResponse": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string"
+                    },
+                    "response": {
+                        "$ref": "#/components/schemas/Card"
+                    }
+                }
+            },
+            "CardListResponse": {
+                "type": "object",
+                "properties": {
+                    "response": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Card"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
