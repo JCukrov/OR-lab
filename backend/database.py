@@ -5,14 +5,13 @@ last_where_clause = ''
 # HELPER
 
 def format_result(result: list):
-    print(result)
     for i, item in enumerate(result):
         result[i] = {
                             'id': item[0], 'name': item[1], 'type': item[2], 'pokedex_number': item[3],
                             'hp': item[4], 'series': item[5], 'set_number': item[6],
                             'illustrator': item[7], 'release_year': item[8],
-                            'attack': {'name': item[11], 'damage': item[12], 'effect': item[13]}
-                        }
+                            'attack_name': item[11], 'attack_damage': item[12], 'attack_effect': item[13]
+        }
     return result
 
 
@@ -54,7 +53,6 @@ def get_card_by_id(id: str) -> dict:
 
     if result == []:
         return None
-    print(result)
     return {'card': format_result(result)[0]}
 
 # 3 GET routes

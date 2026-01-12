@@ -1,4 +1,4 @@
 .*
-!.env
+frontend/.env
 !.gitignore
 __pycache__
