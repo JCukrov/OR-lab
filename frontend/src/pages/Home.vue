@@ -22,6 +22,10 @@ const submitSearch = async() => {
     cards.value = await handleSearch(searchValue.value, searchColumn.value)
 }
 
+const resetTable = async() => {
+  cards.value = await fetchAll()
+}
+
 onMounted(async() => {
   cards.value = await fetchAll()
 })
@@ -40,8 +44,8 @@ onMounted(async() => {
     <button type="submit">Search</button>
   </form>
 
-  
-  <button @click="fetchAll">Reset table</button>
+
+  <button @click="resetTable">Reset table</button>
   <button @click="return_JSON(cards)">Get JSON</button>
   <button @click="downloadCSV(cards)">Get CSV</button>
   <DataTable
