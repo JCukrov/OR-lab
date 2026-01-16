@@ -46,12 +46,12 @@ class CardUpdateRequest(BaseModel):
 #------------------------------
 
 # GET ALL
-@app.get('/cards')
+@app.get('/card')
 def get_cards():
     return {'response': get_all_cards()}
 
 # GET ONE
-@app.get('/card/id/{card_id}')
+@app.get('/card/{card_id}')
 def get_card(response: Response, card_id: str):
     result = get_card_by_id(card_id)
     print(result)
@@ -63,7 +63,7 @@ def get_card(response: Response, card_id: str):
     return {'status': 'OK', 'response': result}
 
 # 3 GET routes
-@app.get('/cards/year/{release_year}')
+@app.get('/card/year/{release_year}')
 def get_card(response: Response, release_year: str):
     result = get_cards_by_year(release_year)
 
@@ -73,7 +73,7 @@ def get_card(response: Response, release_year: str):
 
     return {'status': 'OK', 'response': result}
 
-@app.get('/cards/type/{card_type}')
+@app.get('/card/type/{card_type}')
 def get_card(response: Response, card_type: str):
     result = get_cards_by_type(card_type)
 
@@ -83,7 +83,7 @@ def get_card(response: Response, card_type: str):
 
     return {'status': 'OK', 'response': result}
 
-@app.get('/cards/series/{series}')
+@app.get('/card/series/{series}')
 def get_card(response: Response, series: str):
     result = get_cards_by_series(series)
 
@@ -96,7 +96,7 @@ def get_card(response: Response, series: str):
 # POST route
 #------------------------------------
 
-@app.post('/card/add')
+@app.post('/card')
 def post_add_card(response: Response, card: CardAdd):
     result = add_card(card)
     if result['status'] == 'Error':
@@ -108,7 +108,7 @@ def post_add_card(response: Response, card: CardAdd):
 # PUT route
 #------------------------------------
 
-@app.put('/card/update/{card_id}/name')
+@app.put('/card/{card_id}')
 def put_update(card_id: str, response: Response, request: CardUpdateRequest):
     result = update_card(card_id, request.name)
     if result['status'] == 'Success':
@@ -127,7 +127,7 @@ def put_update(card_id: str, response: Response, request: CardUpdateRequest):
 # DELETE route
 #----------------------------------
 
-@app.delete('/card/delete/{card_id}')
+@app.delete('/card/{card_id}')
 def delete_card(response: Response, card_id: str):
     result = delete_card_by_id(card_id)
     if result['status'] == 'Error':
@@ -140,7 +140,7 @@ def delete_card(response: Response, card_id: str):
 #----------------------------------
 # POST card search (OLD
 #----------------------------------
-@app.post('/search_cards')
+@app.post('/search')
 def post_cards(request: CardSearch):
     result = search_cards(request.column, request.value)
     print(result)

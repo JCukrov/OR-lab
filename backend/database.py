@@ -7,10 +7,16 @@ last_where_clause = ''
 def format_result(result: list):
     for i, item in enumerate(result):
         result[i] = {
-                            'id': item[0], 'name': item[1], 'type': item[2], 'pokedex_number': item[3],
-                            'hp': item[4], 'series': item[5], 'set_number': item[6],
-                            'illustrator': item[7], 'release_year': item[8],
-                            'attack_name': item[11], 'attack_damage': item[12], 'attack_effect': item[13]
+                "@context": {
+                    "@vocab": "https://schema.org/",
+                    "name": "name",
+                    "release_year": "releaseDate"
+                },
+                "@type": "Product",
+                'id': item[0], 'name': item[1], 'type': item[2], 'pokedex_number': item[3],
+                'hp': item[4], 'series': item[5], 'set_number': item[6],
+                'illustrator': item[7], 'release_year': item[8],
+                'attack_name': item[11], 'attack_damage': item[12], 'attack_effect': item[13]
         }
     return result
 
@@ -32,10 +38,11 @@ def get_all_cards():
     '''
     result = cur.execute(query).fetchall()
 
-    result = format_result(result)
     con.close()
+
+    result = format_result(result)
     last_where_clause = ''
-    return {'cards': result}
+    return result
 
 #GET one
 def get_card_by_id(id: str) -> dict:
@@ -51,9 +58,12 @@ def get_card_by_id(id: str) -> dict:
     '''
     result = cur.execute(query, [id]).fetchall()
 
+    con.close()
+
+    print(result)
     if result == []:
         return None
-    return {'card': format_result(result)[0]}
+    return format_result(result)[0]
 
 # 3 GET routes
 def get_cards_by_type(card_type: str) -> dict:
@@ -69,10 +79,12 @@ def get_cards_by_type(card_type: str) -> dict:
     '''
     result = cur.execute(query, [card_type]).fetchall()
 
+    con.close()
+
     if result == []:
         return None
 
-    return {'cards': format_result(result)}
+    return format_result(result)
 
 def get_cards_by_year(release_year: str) -> dict:
     con = sqlite3.connect('./data/database.db')
@@ -87,9 +99,11 @@ def get_cards_by_year(release_year: str) -> dict:
     '''
     result = cur.execute(query, [release_year]).fetchall()
 
+    con.close()
+
     if result == []:
         return None
-    return {'cards': format_result(result)}
+    return format_result(result)
 
 def get_cards_by_series(series: str) -> dict:
     con = sqlite3.connect('./data/database.db')
@@ -104,9 +118,11 @@ def get_cards_by_series(series: str) -> dict:
     '''
     result = cur.execute(query, [series]).fetchall()
 
+    con.close()
+
     if result == []:
         return None
-    return {'cards': format_result(result)}
+    return format_result(result)
 
 #----------------------------------------
 # ADD CARD
@@ -202,8 +218,10 @@ def search_all_columns(columns, value):
 
     result = format_result(result)
 
+    con.close()
+
     last_where_clause = where_clause 
-    return {'cards': result}
+    return result
         
 
 
@@ -239,8 +257,9 @@ def search_cards(column, value):
     '''
     result = cur.execute(query, [f'%{value}%']).fetchall()
 
+    con.close()
+
     result = format_result(result)
 
-    con.close()
     last_where_clause = where_clause
-    return {'cards': result}
+    return result
